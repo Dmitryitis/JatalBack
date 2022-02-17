@@ -1,0 +1,73 @@
+{% extends 'layout/loginbase.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="login">
+        <div style="background: url('{% static 'img/login/loin-bg.jpg' %}') center no-repeat;width: 100%;height: 100%;min-height:100vh;background-size: cover;"></div>
+
+        <div class="login__inner" id="registr">
+            <div class="auth__title">Welcome to Jatal</div>
+
+            <form action="{% url 'registration' %}" method="post" class="auth__auth">
+                {% csrf_token %}
+                <div class="auth__item">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="auth__email" name="username"
+                           v-model="user.username"
+                           required>
+                    <div class="auth__error" v-if="!valid_username & user.username.length !== 0">Username от 3 до 12
+                        символов
+                    </div>
+                </div>
+                <div class="auth__item">
+                    <label for="username">First Name</label>
+                    <input type="text" id="firstname" class="auth__email" name="first_name"
+                           required>
+                </div>
+                <div class="auth__item">
+                    <label for="username">Last Name</label>
+                    <input type="text" id="lastname" class="auth__email" name="last_name"
+                           required>
+                </div>
+                <div class="auth__item">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="auth__email" name="email"
+                           v-model="user.email"
+                           required>
+                    <div class="auth__error" v-if="!valid_email & user.email.length !== 0">
+                        example@ex.com
+                    </div>
+                </div>
+
+                <div class="auth__item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="auth__email"
+                           v-model="user.password"
+                           required name="password">
+                    <div class="auth__error" v-if="!valid_password & user.password.length !== 0">
+                        от 4 символов, содержит или цифру или !;№:?
+                    </div>
+                </div>
+                <div class="auth__item">
+                    <label for="rep_password">Repeat password</label>
+                    <input type="password" id="rep_password" class="auth__email"
+                           v-model="user.rep_password"
+                           required name="rep_password">
+
+                    <div class="auth__error" v-if="!valid_rep_password & user.rep_password.length !== 0">
+                        Пароли не совпадают
+                    </div>
+                </div>
+                <div class="auth__item auth__item-remem">
+                    <div class="auth__create">
+                        <button type="submit" class="auth__btn" v-bind:disabled="!formReady">
+                            Registration
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="stub"
+         style="background-image: url("{% static 'img/stub/sdfsd.jpg' %}"); background-position: 50% 50%; min-height: 100vh;">
+    <div class="container">
+        <div class="stub__inner">
+            <div class="stub__info">
+                <svg class="stub_symbol">
+                    <use xlink:href="#error"></use>
+                </svg>
+                <h2 class="stub__title">
+                    404
+                </h2>
+                <p class="stub__text">
+                    Такой страницы на сайте не найдено
+                </p>
+            </div>
+            <div class="stub__img">
+                <img src="{% static 'img/stub/404.jpg' %}" class="stub__photo" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

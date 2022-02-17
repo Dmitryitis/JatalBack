@@ -1,0 +1,44 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="singpost">
+    <div class="container">
+        <div class="singpost__inner">
+            <div class="singpost__title wow fadeInLeft">{{ post.title }}</div>
+            <div class="singpost__photo wow fadeInRight">
+                <img src="{{ post.photo.url }}" alt="" class="singpost__img">
+            </div>
+            <div class="singpost__info wow fadeInLeft">
+                <div class="singpost__info-item">{{ post.date_create|date:"M d,Y H:i" }}</div>
+                <div class="singpost__info-item">{{ post.author.first_name }} {{ post.author.last_name }}</div>
+                <div class="singpost__info-item">{{view}}view</div>
+                <div class="singpost__info-items posts__topic">{{ post.topic.name }}</div>
+            </div>
+            <div class="singpost__text">
+                {{ post.text }}
+            </div>
+
+<!--            {#-->
+<!--            <div class="singpost__tags wow fadeInLeft">#}-->
+<!--                {#-->
+<!--                <div class="singpost__tags-item posts__tags-item">tag</div>-->
+<!--                #}-->
+<!--                {#-->
+<!--            </div>-->
+<!--            #}-->
+
+            <div class="singpost__author">
+                <div class="singpost__author-content">
+                    <div class="singpost__author-name">{{ post.author.first_name }} {{ post.author.last_name }}</div>
+                </div>
+
+            </div>
+            <div class="comments" id="comments">
+                 <api-comments></api-comments>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

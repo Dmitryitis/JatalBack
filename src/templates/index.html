@@ -1,0 +1,158 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="intro" id="introVue">
+
+        <button class="intro__arrow intro__arrow--prev" type="button" id="intro__arrow--prev"
+                v-on:click="clickLeftBtn">
+            <svg class="intro__arrow-icon">
+                <use xlink:href="#arrow"></use>
+            </svg>
+        </button>
+        <button class="intro__arrow intro__arrow--next" type="button" id="intro__arrow--next"
+                v-on:click="clickRightBtn">
+            <svg class="intro__arrow-icon">
+                <use xlink:href="#arrow"></use>
+            </svg>
+        </button>
+
+        <div class="intro__inner" id="intro">
+            {% if intro_posts %}
+                {% for intro in intro_posts %}
+                    <div>
+                        <div class="intro__bg">
+                            <img src="{{ intro.photo.url }}" alt="" class="intro__img">
+
+                            <div class="intro__item">
+                                <div class="intro__topic">{{ intro.topic.name }}</div>
+                                <p class="intro__text"><a href="{% url 'single_post' intro.pk %}"
+                                                          class="intro__title intro__title-underline">
+                                    {{ intro.title }}
+                                </a></p>
+                                <div class="intro__author-info">
+                                    <div class="intro__author-name">
+                                        by {{ intro.author.first_name }} {{ intro.author.last_name }}</div>
+                                    <div class="intro__author-data">{{ intro.date_create |date:"M d,Y" }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="trend">
+        <div class="container">
+            <div class="trend__inner">
+
+                <div class="trend__header">
+                    <div class="trend__title wow fadeInLeft">Trending</div>
+                    <div class="trend__line wow fadeInRight"></div>
+                </div>
+                <div class="trend__content">
+                    {% for trend in trends %}
+                        <div class="trend__item  wow fadeInLeft">
+                            <a href="{% url 'single_post' trend.pk %}" class="trend__topic">{{ trend.topic.name }}</a>
+                            <p><a href="{% url 'single_post' trend.pk %}"
+                                  class="trend__text trend__text--underline">{{ trend.title }}</a></p>
+                            <div class="trend__date">{{ trend.date_create|date:"M d,Y" }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="popular">
+        <div class="container">
+            <div class="popular__inner">
+
+                <div class="trend__header">
+                    <div class="trend__title trend__title--popular">Most Popular</div>
+                    <div class="trend__line trend__line--popular"></div>
+                </div>
+
+                <div class="popular__content">
+                    {% for popular in populars %}
+                        <div class="popular__item">
+                            <div class="popular__photo">
+                                <a href="{% url 'single_post' popular.pk %}">
+                                    <img src="{{ popular.photo.url }}" alt="" class="popular__img popular__img-img"></a>
+                                <label for="topic">
+                                    <a href="{% url 'single_post' popular.pk %}" class="popular__topic"
+                                       id="topic">{{ popular.topic.name }}</a>
+                                </label>
+                            </div>
+                            <p><a href="{% url 'single_post' popular.pk %}"
+                                  class="popular__title popular__title--underline">{{ popular.title }}</a>
+                            </p>
+
+                            <div class="popular__text">
+                                {{ popular.text }}
+                            </div>
+                            <div class="popular__info">
+                                <div class="popular__info-author">
+                                    by {{ popular.author.first_name }} {{ popular.author.last_name }}</div>
+                                <div class="popular__info-date">{{ popular.date_create| date:"M d,Y" }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="latenews">
+        <div class="container">
+            <div class="latenews__inner">
+
+                <div class="trend__header">
+                    <div class="trend__title trend__title--popular">Latest News</div>
+                    <div class="trend__line trend__line--popular"></div>
+                </div>
+
+                <div class="popular__content">
+                    {% for latest in last_news %}
+                        <div class="popular__item popular__item-latest">
+                            <div class="popular__photo">
+                                <a href="{% url 'single_post' latest.pk %}">
+                                    <img src="{{ latest.photo.url }}" alt="" class="popular__img"></a>
+                                <label for="topics">
+                                    <a href="{% url 'single_post' latest.pk %}" class="popular__topic"
+                                       id="topics">{{ latest.topic.name }}</a>
+                                </label>
+                            </div>
+                            <p><a href="{% url 'single_post' latest.pk %}" class="popular__title popular__title--underline">
+                                {{ latest.title }}
+                            </a>
+                            </p>
+                            <div class="popular__text">
+                                {{ latest.text }}
+                            </div>
+                            <div class="popular__info">
+                                <div class="popular__info-author">
+                                    by {{ latest.author.first_name }} {{ latest.author.last_name }}</div>
+                                <div class="popular__info-date">{{ latest.date_create| date:"M d,Y" }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="btn__inner wow bounce">
+                    <a href="{% url 'all_posts' %}" class="btn-latest">
+                        <div class="btn__text">View More News</div>
+
+                        <svg class="btn__icon-arrow">
+                            <use xlink:href="#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

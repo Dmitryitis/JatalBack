@@ -1,0 +1,65 @@
+{% extends 'layout/cabinetbase.html' %}
+{% load static %}
+
+{% block cabinet %}
+<div class="write__content">
+    <div class="pers__allpost-header">
+        <div class="pers__allpost-title">Write post</div>
+    </div>
+
+    <div class="write__inf">
+        <form method="post" enctype="multipart/form-data" action="{% url 'write_post' %}">
+            {% csrf_token %}
+            <div class="write__title">
+                <label for="title">Title</label>
+                <input type="text" id="title" class="write__title-field" name="title">
+            </div>
+            <div class="write__photo">
+                <div class="write__photo-info">
+                    <div class="photo__info-title">Choose title-photo</div>
+                    <div class="helper">
+                        <input class="photo__info-btn" type="file" name="photo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="write__select">
+                <div class="write__topic">Choose topic</div>
+                <select name="topic" id="selectI" class="select select_write">
+                    {% for topic in topics %}
+                    <option value="{{ topic.name }}" name="topic">{{ topic.name }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="write__text">
+                <label for="text">Text</label>
+                <textarea class="write__tex" name="text" id="text" cols="30" rows="10"></textarea>
+            </div>
+
+            <div class="widget">
+
+                <div class="widget__body">
+
+                    <label class="toggle">
+                        <input type="checkbox" class="toggle__real" name="original">
+                        <span class="toggle__fake"></span>
+                        <span class="toggle__title">Оригинальный текст?</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="write__post">
+                <input type="checkbox" name="agreement" id="agreement">
+                <label for="agreement">Согласие с Пользовательским соглашением</label>
+            </div>
+
+            <div class="write__post">
+                <button class="write__btn" type="submit">Send Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

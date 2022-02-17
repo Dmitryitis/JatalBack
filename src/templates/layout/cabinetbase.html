@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow, noodp">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Quattrocento&family=Roboto:wght@300;400;700&family=Fira+Sans:ital,wght@0,300;1,300&family=Tenali+Ramakrishna&display=swap"
+          rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.min.css' %}">
+
+</head>
+<body>
+<div class="cabinet">
+
+    <div class="cabinet__bg"
+         style="background: url('{% static 'img/cabinet/bg-cabinet.jpg' %}') center no-repeat;
+                 width: 100%;min-height: 100vh;
+                 height: 100%;background-size: cover;
+                 position: absolute;top: 0;left: 0;z-index: -1;">
+    </div>
+    <div class="cabinet__inner">
+
+        <div class="cabinet__header">
+            <div class="cabinet__logo">Jatal</div>
+            <nav class="cabinet__nav">
+                <a href="{% url 'main_personal' %}" class="cabinet__link">Personal Data</a>
+                <a href="{% url 'write_post' %}" class="cabinet__link">Write Post</a>
+                <a href="{% url 'cabinet_posts' %}" class="cabinet__link">All posts</a>
+                <a href="{% url 'main_page' %}" class="cabinet__link">Back home</a>
+            </nav>
+        </div>
+
+        {% block cabinet %}
+        {% endblock %}
+
+    </div>
+</div>
+
+</body>
+</html>

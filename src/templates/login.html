@@ -1,0 +1,30 @@
+{% extends 'layout/loginbase.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="login" id="log">
+        <div style="background: url('{% static 'img/login/loin-bg.jpg' %}') center no-repeat;width: 100%;height: 100vh;background-size: cover;">
+
+        </div>
+
+        <div class="login__inner login__inner-main">
+
+            <div class="text-js">
+                <div class="login__title text-js" id="autoText">Welcome to Jatal!</div>
+            </div>
+            <div class="login__button wow fadeInUp">
+                <a href="{% url 'auth_jatal' %}" class="login__btn" type="button">Login</a>
+            </div>
+
+            <a href="{% url 'registration' %}" class="login__subtline wow fadeInUp">
+                or create account
+            </a>
+
+              <a href="{% url 'forgot' %}" class="login__subtline wow fadeInUp">
+                or forgot password
+            </a>
+
+        </div>
+    </div>
+{% endblock %}
+

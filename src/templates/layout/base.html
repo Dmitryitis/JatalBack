@@ -1,0 +1,106 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow, noodp">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Quattrocento&family=Roboto:wght@300;400;700&family=Fira+Sans:ital,wght@0,300;1,300&family=Tenali+Ramakrishna&display=swap"
+          rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.min.css' %}">
+</head>
+<body>
+
+{% include 'sprite/sprite.html' %}
+
+<div id="preloader">
+    <div class="preloader" v-if="show">
+        <svg class="preloader__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                  d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+            </path>
+        </svg>
+    </div>
+</div>
+
+<div id="app">
+    <header class="header" v-bind:class="{'header__fixed':isFixed}">
+        <div class="container">
+            <div class="header__inner">
+
+                <div class="btn__burger">
+                    <a href="#" class="burger" id="burger" role="button" @click.prevent="toggleMenu">
+                        <svg class="burger__logo">
+                            <use xlink:href="#burger"></use>
+                        </svg>
+                    </a>
+                </div>
+
+                <nav class="nav" id="nav" v-bind:class="{'see-nav':isActive}">
+                    <a href="{% url 'main_page' %}" class="nav__link ">Home</a>
+                    <a href="{% url 'all_posts' %}" class="nav__link">All post</a>
+                    <div class="nav__link--logo ">Jatal</div>
+                    <a href="{% url 'about' %}" class="nav__link ">About</a>
+                    <a href="{% url 'contact' %}" class="nav__link">Contacts</a>
+                </nav>
+
+                <div class="header__logo">Jatal</div>
+                <!--            <h1>dfsdfs</h1>-->
+                {% if user %}
+                    <a href="{% url 'main_personal' %}" class="header__auth-text help-text active">
+                        <svg class="account-logo">
+                            <use xlink:href="#account"></use>
+                        </svg>
+                    </a>
+                    <a href="{% url 'logout' %}" class="header__auth active" id="logout">
+                        <svg class="header__auth-logo">
+                            <use xlink:href="#logout"></use>
+                        </svg>
+                        <div class="header__auth-text">Logout</div>
+                    </a>
+                {% else %}
+                    <a href="{% url 'main_login' %}" class="header__auth active" id="login">
+                        <svg class="header__auth-logo">
+                            <use xlink:href="#login"></use>
+                        </svg>
+                        <div class="header__auth-text">Login</div>
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </header>
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+<div class="footer">
+    <div class="container">
+        <div class="footer__inner">
+            <div class="footer__copyrigth">&copy;Copyright2020.
+                <r class="black">All Rigths Reserved</r>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript" src="{% static 'js/app/app.min.js' %}"></script>
+</body>
+</html>

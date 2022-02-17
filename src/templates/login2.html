@@ -1,0 +1,37 @@
+{% extends 'layout/loginbase.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="login">
+        <div style="background: url('{% static 'img/login/loin-bg.jpg' %}') center no-repeat;width: 100%;height: 100vh;background-size: cover;"></div>
+
+        <div class="login__inner login__inner-main">
+            <div class="auth__title">Welcome to Jatal</div>
+
+            <form action="{% url 'auth_jatal' %}" method="post" class="auth__auth">
+                {% csrf_token %}
+                {% if error_auth %}
+                    <div class="auth__err">{{ error_auth }}</div>
+                {% endif %}
+                <div class="auth__item">
+                    <label for="email">Username</label>
+                    <input type="text" id="email" class="auth__email" name="username"
+                           required>
+                </div>
+
+                <div class="auth__item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="auth__email"
+                           required name="password">
+                </div>
+                <div class="auth__item auth__item-remem">
+                    <div class="auth__create">
+                        <button type="submit" class="auth__btn">Login</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

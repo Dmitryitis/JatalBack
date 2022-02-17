@@ -1,0 +1,47 @@
+{% extends 'layout/cabinetbase.html' %}
+{% load static %}
+
+{% block cabinet %}
+    <div class="cabinet__content">
+        <div class="cabinet__content-header">
+            <div class="profile__content-info">
+                <div class="info__title">Personal Information</div>
+                <div class="info__subtitle">you attract what's inside you</div>
+            </div>
+        </div>
+
+        {% if user %}
+            <form action="" method="get" class="personal__info">
+                <div class="personal__info-item">
+                    <div class="personal__info-inner">
+                        <label class="personal__info-name">Name</label>
+                        <div class="personal__info-fieldname">{{ user.first_name }}</div>
+
+                    </div>
+                    <div class="personal__info-inner">
+                        <label class="personal__info-name">Surname</label>
+                        <div class="personal__info-fieldname">{{ user.last_name }}</div>
+                    </div>
+                </div>
+
+                <div class="personal__info-item">
+                    <div class="personal__info-inner">
+                        <label class="personal__info-name">Email</label>
+                        <div class="personal__info-fieldname">{{ user.email }}</div>
+                    </div>
+                    <div class="personal__info-inner">
+                        <label class="personal__info-name">About</label>
+                        <div class="personal__info-text redact__info-text">{{ user.profile.about }}
+                        </div>
+                    </div>
+                </div>
+
+                {#        <div class="btn-pers">#}
+                {#            <button type="submit" class="personal__save">Редактировать</button>#}
+                {#        </div>#}
+
+            </form>
+        {% endif %}
+
+    </div>
+{% endblock %}

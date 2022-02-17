@@ -1,0 +1,94 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="posts" id="posts__search-system" v-cloak>
+        <div class="container">
+            <div class="posts__inner">
+                <div class="posts__content">
+                    {% if posts %}
+                        {% for post in posts %}
+                            <div class="posts__item wow fadeInUp">
+
+                                <div class="posts__photo">
+                                    <a href="{% url 'single_post' post.pk %}">
+                                        <img src="{{ post.photo.url }}" alt="" class="posts__img"></a>
+                                </div>
+                                <div class="posts__item-content">
+                                    <p><a href="{% url 'single_post' post.pk %}"
+                                          class="posts__title posts__title--underline">{{ post.title }}</a>
+                                    </p>
+
+                                    <div class="posts__info">
+                                        <div class="posts__topic">{{ post.topic.name }}</div>
+                                        <div class="posts__date">{{ post.date_create|date:"M d,Y H:i" }}</div>
+                                        <div class="posts__name">{{ post.author.first_name }} {{ post.author.last_name }}</div>
+<!--{#                                        <div class="posts__comments">10 comments</div>#}-->
+<!--{#                                        <div class="posts__views">fff</div>#}-->
+                                    </div>
+
+                                    <div class="posts__text">
+                                        {{ post.text }}
+                                    </div>
+                                    <label class="mb">
+                                        <a class="posts__btn" href="{% url 'single_post' post.pk %}">Read More</a>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="error_search">Ничего не найдено</div>
+                    {% endif %}
+                </div>
+
+                <form action="{% url 'all_posts' %}" method="post" class="posts__search-system"
+                      v-bind:class="{'fixed': fixedReady}"
+                      id="post">
+                    {% csrf_token %}
+                    <div class="posts__category">
+                        <div class="posts__category-title">Categories</div>
+                        <div class="posts__category-line"></div>
+                    </div>
+
+                    <select name="val" id="selectId" class="select">
+                        <option value="" name="valu">Select category...</option>
+                        {% for topic in topics %}
+                            <option value="{{ topic.name }}" name="val">{{ topic.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="autocomplete posts__search ">
+                        <label>
+                            <input type="search" id="search" name="search" class="posts__search-field"
+                                   placeholder="Search..." v-bind:value="inputValue" v-on:input="searchFunc"/>
+                        </label>
+                        <label>
+                            <button type="submit" class="searh-btn">Search</button>
+                        </label>
+                    </div>
+                    {% verbatim %}
+                    <div v-if="searched.length !== 0">
+                        <div class="posts__category">
+                            <div class="posts__category-title">Найдено {{ searched.length }}</div>
+                            <div class="posts__category-line"></div>
+                        </div>
+
+                        <div class="now__search">
+                            <a href="#" class="now__search-item" v-for="(search,i) in searched" v-on:click="clickSearched(i)">
+                                {{ search }}</a>
+                        </div>
+
+                    </div>
+                    {% endverbatim %}
+                </form>
+            </div>
+
+<!--            {#            <div class="posts__pagination" ref="pagination">#}-->
+<!--            {#                <a href="#" class="posts__pagination-item">1</a>#}-->
+<!--            {#                <a href="#" class="posts__pagination-item">2</a>#}-->
+<!--            {#            </div>#}-->
+
+        </div>
+    </div>
+
+
+{% endblock %}
