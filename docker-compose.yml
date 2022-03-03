@@ -1,7 +1,41 @@
 version: '3'
 
 services:
+  app:
+    image: app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      POSTGRES_DB: jatal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5000
+    networks:
+      - web
+
+  postgres:
+    image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: jatal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "db:/var/lib/postgresql/data/"
+
   redis:
     image: redis:6-alpine
     ports:
       - 6379:6379
+
+volumes:
+  db:
+
+networks:
+  web:
+    external:
+      name: web
