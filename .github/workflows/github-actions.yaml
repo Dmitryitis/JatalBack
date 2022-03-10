@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Build Docker Python Image
-        run: docker image build . --file Dockerfile --tag jatal/jatal:latest
+        run: docker image build . --file Dockerfile --tag qwer342/jatal:latest
 
       - name: Push Docker Python Image
-        run: docker image push jatal/jatal:latest
+        run: docker image push qwer342/jatal:latest
