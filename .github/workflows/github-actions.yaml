@@ -10,4 +10,4 @@ jobs:
   develop-build:
     runs-on: "ubuntu-latest"
     steps:
-      - run: docker-compose -f ./../docker-compose.yml -p jatal_backend build
+      - run: docker-compose -f docker-compose.yml -p jatal_backend build
