@@ -12,4 +12,4 @@ jobs:
     steps:
       - run: echo "🔎 The name of your branch is ${{ github.ref }}"
       - run: echo "Start action"
-      - run: docker-compose -f docker-compose.yml -p jatal_backend build
+      - run: docker-compose -f deploy/docker-compose.yml -p jatal_backend build
