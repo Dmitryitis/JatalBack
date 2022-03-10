@@ -1,0 +1,13 @@
+name: "deploy  project"
+on:
+  push:
+    branches:
+      - develop
+    tags:
+      - docker
+      - jatal
+jobs:
+  develop-build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - run: docker-compose -f ../../docker-compose.yml -p jatal_backend build
