@@ -69,4 +69,5 @@ function startWatch() {
 
 exports.styles = styles;
 exports.scripts = scripts;
+exports.build = parallel(scripts, styles);
 exports.default = parallel(scripts, styles, series(task('runserver'), task('browsersync')), startWatch);
