@@ -31,7 +31,7 @@ jobs:
         run: docker image push qwer342/jatal:latest
 
   tests:
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
