@@ -1,5 +1,7 @@
 import json
 from datetime import datetime
+from unittest import mock
+from django.core.files import File
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
@@ -24,8 +26,11 @@ class ApiTests(APITestCase):
 
         topic_test1 = Topic.objects.create(name='Social')
 
+        img_mock = mock.MagicMock(spec=File)
+        img_mock.name = "default.jpg"
+
         self.post_test1 = Post.objects.create(title='aaaa', text='ddddd', author=user_test1, topic=topic_test1,
-                                              photo='images/ph1_IQQJS1D.jpg')
+                                              photo=img_mock.name)
         self.post_test1.save()
 
         self.comment_test1 = Comment.objects.create(text='test', author_id=user_test1.id, post_id=self.post_test1.id)
@@ -66,10 +71,8 @@ class ApiTests(APITestCase):
         response = self.client.put(path=f'/api/{self.post_test1.id}/comment/{self.comment_test1.id}',
                                    data=json.dumps(self.valid_comment_update),
                                    content_type='application/json')
-        print(response.status_code)
         self.assertEqual(response.status_code, status.HTTP_301_MOVED_PERMANENTLY)
 
     def test_delete_comment(self):
         response = self.client.delete(path=f'/api/{self.post_test1.id}/comment/{self.comment_test1.id}')
-        print(response.status_code)
         self.assertEqual(response.status_code, status.HTTP_301_MOVED_PERMANENTLY)

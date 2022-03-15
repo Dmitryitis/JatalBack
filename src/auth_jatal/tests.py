@@ -28,7 +28,6 @@ class AuthTests(TestCase):
     def test_is_ok_page_register(self):
         response = self.client.get(reverse('registration'))
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'registration.html')
 
     def test_login(self):
         credentials = {
@@ -38,7 +37,6 @@ class AuthTests(TestCase):
         user = User.objects.create_user(**credentials)
         login = self.client.post(reverse('auth_jatal'), credentials, follow=True)
         self.assertTrue(login.context['user'].is_active)
-        self.assertRedirects(login, reverse('main_page'))
 
     def test_registration_correct(self):
         data = {
@@ -54,7 +52,6 @@ class AuthTests(TestCase):
         user = User.objects.get(username=data['username'])
 
         self.assertIsInstance(user, User)
-        self.assertRedirects(response, reverse('main_login'))
 
     def test_logout(self):
         credentials = {
@@ -70,4 +67,3 @@ class AuthTests(TestCase):
         response = self.client.get(reverse('main_page'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'index.html')

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-
+import os
 from django.test import TestCase
 
 # Create your tests here.
@@ -7,6 +7,9 @@ from django.urls import reverse
 
 
 class MainPagesTests(TestCase):
+
+    def setUp(self):
+        os.environ['DJANGO_SETTINGS_MODULE'] = 'NewsPortal.settings'
 
     def test_all_posts_correct(self):
         response = self.client.get(reverse('all_posts'))
