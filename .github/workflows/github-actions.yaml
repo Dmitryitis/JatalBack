@@ -33,7 +33,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs:
+      - build
     steps:
       - name: Set up python 3.8
       uses: actions/setup-python@v2
