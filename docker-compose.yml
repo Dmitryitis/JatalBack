@@ -14,9 +14,10 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - DEBUG=True
-
     depends_on:
         - db
+    ports:
+      - "3000"
 
   db:
     image: postgres:11.1-alpine
@@ -26,3 +27,5 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    volumes:
+      - ./docker-init:/docker-entrypoint-initdb.d/
