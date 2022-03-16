@@ -30,3 +30,5 @@ ENV DEBUG False
 ENV SENTRY_ENVIRONMENT staging
 
 EXPOSE 5000
+
+CMD python src/manage.py migrate
