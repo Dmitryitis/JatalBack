@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command:
-      bash -c "python src/manage.py test api"
+      bash -c "wait-for-it.sh -t 25 db:5432 && python src/manage.py test api"
     environment:
       - POSTGRES_DATABASE_NAME=education
       - POSTGRES_USER=postgres
