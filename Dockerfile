@@ -16,7 +16,6 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED 1
 
 RUN apk add --no-cache bash postgresql-libs postgresql-dev g++ gcc libxslt-dev jpeg-dev zlib-dev linux-headers
-RUN apt-get install -y curl
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt && pip install uwsgi==2.0.19.1
