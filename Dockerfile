@@ -19,7 +19,7 @@ RUN apk add --no-cache bash postgresql-libs postgresql-dev g++ gcc libxslt-dev j
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt && pip install uwsgi==2.0.19.1
-
+COPY wait-for-it.sh .
 COPY . .
 
 COPY --from=node /app/src/static/ /app/src/static/

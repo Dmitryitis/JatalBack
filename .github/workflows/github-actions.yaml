@@ -48,9 +48,6 @@ jobs:
       - name: Run docker compose service db
         run: docker-compose -f docker-compose.yml -p jatal_test up --build --exit-code-from python
 
-      - name: Run api tests
-        run: python src/manage.py test api
-
   build:
     runs-on: ubuntu-latest
     needs:
