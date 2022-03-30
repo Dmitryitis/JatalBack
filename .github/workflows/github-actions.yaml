@@ -90,9 +90,9 @@ jobs:
       - run: apk add --no-cache openssh-client bash
       - run: chmod +x setup_env.sh
       - run: bash setup_env.sh
-
       - name: SSh dir
-        run: mkdir -p ~/.ssh && echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+        run: mkdir -p ~/.ssh
+      - run: echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
       - run: cat ~/.ssh/id_rsa
       - run: chmod 700 ~/.ssh/id_rsa
       - run: eval "$(ssh-agent -s)"
