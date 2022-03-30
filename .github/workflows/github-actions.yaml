@@ -53,8 +53,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs:
-      - tests
     steps:
       - name: SetUp QEMU
         uses: docker/setup-qemu-action@v1
@@ -69,18 +67,18 @@ jobs:
               password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - uses: actions/checkout@v2
-      - name: Build Docker Python Image
-        run: docker image build . --file Dockerfile --tag qwer342/python:latest
-
-      - name: Push Docker Python Image
-        run: docker image push qwer342/python:latest
-
-      - uses: actions/checkout@v2
       - name: Build Docker Nginx Image
         run: docker image build . --file nginx/Dockerfile --tag qwer342/nginx:latest
 
       - name: Push Docker Nginx Image
         run: docker image push qwer342/nginx:latest
+
+      - uses: actions/checkout@v2
+      - name: Build Docker Python Image
+        run: docker image build . --file Dockerfile --tag qwer342/python:latest
+
+      - name: Push Docker Python Image
+        run: docker image push qwer342/python:latest
 
   deploy:
     runs-on: ubuntu-latest
