@@ -85,7 +85,7 @@ jobs:
     steps:
       - name: Bash inatall and create env
         run: sudo apt-get install -y openssh-client bash
-      - run: chmod +x setup_env.sh
+      - run: sudo chmod +x setup_env.sh
       - run: bash setup_env.sh
 
       - name: SSh dir
