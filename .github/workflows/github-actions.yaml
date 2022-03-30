@@ -8,7 +8,7 @@ on:
       - docker
       - jatal
 jobs:
-  notify:
+  otify:
     runs-on: ubuntu-latest
     steps:
       - name: Push notify
@@ -53,6 +53,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: tests
     steps:
       - name: SetUp QEMU
         uses: docker/setup-qemu-action@v1
@@ -82,6 +83,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Bash inatall and create env
         run: sudo apt-get install -y openssh-client bash
