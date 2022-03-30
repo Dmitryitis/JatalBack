@@ -25,6 +25,14 @@ services:
     ports:
       - "8000"
 
+  promtail:
+    image: grafana/promtail:1.4.1
+    volumes:
+      - ./promtail/promtail.yaml:/etc/promtail/promtail.yml
+      - /var/log/nginx/:/var/log/nginx/
+    command:
+      - '-config.file=/etc/promtail/promtail.yml'
+
 volumes:
     static:
     media:
