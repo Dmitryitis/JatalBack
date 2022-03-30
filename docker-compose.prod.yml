@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nginx:
+    image: qwer342/nginx:latest
+    restart: always
+    ports:
+      - "80"
+    depends_on:
+      - python
+    volumes:
+      - static:/app/src/static
+      - media:/app/src/media
+
+  python:
+    image: qwer342/python:latest
+    restart: always
+    command: gunicorn NewsPortal.wsgi:application --bind 0.0.0.0:8000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - static:/app/src/static
+      - media:/app/src/media
+    ports:
+      - "8000"
+
+volumes:
+    static:
+    media:

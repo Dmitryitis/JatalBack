@@ -24,7 +24,7 @@ COPY . .
 
 COPY --from=node /app/src/static/ /app/src/static/
 
-RUN python3 src/manage.py collectstatic --noinput
+RUN python3 src/manage.py collectstatic --noinput  --clear
 
 ENV DEBUG False
 ENV SENTRY_ENVIRONMENT staging
